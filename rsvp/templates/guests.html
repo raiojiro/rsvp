@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding RSVP</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+</head>
+<body>
+    <div class="container">
+        <h1>Wedding RSVP</h1>
+                <!-- Attendees Form (initially hidden) -->
+                <form id="attendees-form" method="POST" action="{% url 'submit_attendee' %}" {% if show_attendees_form %}style="display: block;"{% endif %}>
+                    {% csrf_token %}
+                    <div id="attendees-container">
+                        {% for i in attendee_range %}
+                        <div class="form-group attendee-input">
+                            <label for="attendee-{{ forloop.counter }}">Attendee {{ forloop.counter }} Name</label>
+                            <input type="text" id="attendee-{{ forloop.counter }}" name="attendee_names[]" required>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+    </div>
+</body>
