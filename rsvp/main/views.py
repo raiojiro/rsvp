@@ -6,7 +6,7 @@ from django.http import HttpResponseForbidden
 MAX_CAPACITY = 100
 
 def home(request):
-    if request.GET.get("invite_code") == "6yXtakjvRkQFiyqR":
+    if request.GET.get("invite_code") == "":
         ontext = {'capacity_full': Guest.objects.count() >= MAX_CAPACITY}
         return render(request,'main.html')
     else:
